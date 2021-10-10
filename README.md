@@ -10,6 +10,8 @@
 
 2-npm install
 
+3-node app.js
+
 # Node modules
 
-express dotenv mongoose validator bcryptjs
+express dotenv mongoose validator bcryptjs jsonwebtoken

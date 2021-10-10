@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
 const User = require("../models/User");
-
+const jwt = require("jsonwebtoken");
 router.post("/register", async (req, res) => {
   const newUser = new User({
     username: req.body.username,
@@ -31,7 +31,12 @@ router.post("/login", async (req, res) => {
     }
     const userObject = user.toObject();
     delete userObject.password;
-    res.status(200).json(userObject);
+    const accessToken = jwt.sign(
+      { id: userObject._id, isAdmin: userObject.isAdmin },
+      process.env.JWT_KEY,
+      { expiresIn: "1w" }
+    );
+    res.status(200).json({ userObject, accessToken });
   } catch (e) {
     res.status(500).json(e);
   }
