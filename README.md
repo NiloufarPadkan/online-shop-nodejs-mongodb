@@ -10,7 +10,9 @@
 
 2-npm install
 
-3-node app.js
+3-start your mongodb server
+
+4-node app.js
 
 # Node modules
 
