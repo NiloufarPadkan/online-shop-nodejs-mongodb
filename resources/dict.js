@@ -3,7 +3,6 @@ var dict = {
   categoryExistence: "این دسته بندی تکراری است",
   productExistence: "این محصول تکراری است",
   productNonExistence: " چنین محصولی وجود ندارد",
-
   tagNonExistence: "چنین تگی وجود ندارد",
   tagExistence: "این تگ نکراری است",
   userNonExistence: "چنین کاربری پیدا نشد",
@@ -17,8 +16,8 @@ var dict = {
   invalidEmail: "ایمیل نامعتبر است",
   AlphanumericError: "نام کاربری باید فقط شامل حروف الفبا و اعداد باشد",
   weakPass:
-    " its weak. minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1",
+    " its weak. required condition : minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1",
   lengthError: "نام کاربری باید بین 6 تا 30 کارکتر باشد",
-}; // make a new dictionary with two pairs
+};
 
 module.exports = dict;

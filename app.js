@@ -6,6 +6,8 @@ const userRoute = require("./routers/user");
 const categoryRoute = require("./routers/category");
 const tagRoute = require("./routers/tag");
 const productRoute = require("./routers/product");
+const Product = require("./models/Product");
+const dict = require("./resources/dict");
 
 const app = express();
 
