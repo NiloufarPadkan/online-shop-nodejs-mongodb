@@ -1,11 +1,7 @@
 const Category = require("../models/Category");
+const dict = require("../resources/dict");
 
 exports.addCategory = async (req, res) => {
-  const existingCategory = await Category.findOne({ name: req.body.name });
-
-  if (existingCategory) {
-    return res.status(422).send("This category already exists");
-  }
   const category = new Category({
     name: req.body.name,
     owner: req.user.id,
@@ -13,24 +9,17 @@ exports.addCategory = async (req, res) => {
 
   try {
     const savedCategory = await category.save();
-    console.log(req.user);
     res.status(200).send(savedCategory);
   } catch (e) {
     res.status(400).send(e);
   }
 };
-
 exports.removeCategory = async (req, res) => {
-  const category = await Category.findOne({ id: req.params.id });
-
-  if (!category) {
-    return res.status(422).send("This category doesnt exist");
-  }
-
   try {
-    removedCategory = await Category.deleteOne({ id: req.params.id });
-
-    res.status(200).send("category removed");
+    removedCategory = await Category.findOneAndDelete({ id: req.params.id });
+    console.log(req.params.id);
+    console.log(removedCategory.id);
+    res.status(200).send(dict.sucessfulRemove);
   } catch (e) {
     res.status(400).send(e);
   }

@@ -1,11 +1,7 @@
 const Tag = require("../models/Tag");
+const dict = require("../resources/dict");
 
 exports.addTag = async (req, res) => {
-  const existingTag = await Tag.findOne({ name: req.body.name });
-
-  if (existingTag) {
-    return res.status(422).send("This tag already exists");
-  }
   const tag = new Tag({
     name: req.body.name,
     owner: req.user.id,
@@ -21,16 +17,10 @@ exports.addTag = async (req, res) => {
 };
 
 exports.removeTag = async (req, res) => {
-  const tag = await Tag.findOne({ id: req.params.id });
-
-  if (!tag) {
-    return res.status(422).send("This tag doesnt exist");
-  }
-
   try {
     removedTag = await Tag.deleteOne({ id: req.params.id });
 
-    res.status(200).send("tag removed");
+    res.status(200).send(dict.sucessfulRemove);
   } catch (e) {
     res.status(400).send(e);
   }

@@ -9,23 +9,9 @@ const {
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
 } = require("../middleware/verify");
-router.post("/add", verifyTokenAndAuthorization, async (req, res) => {
-  let product = new Product({
-    name: req.body.name,
-    description: req.body.description,
-    image: req.body.image,
-    brand: req.body.brand,
-    price: req.body.price,
-    category: req.body.category,
-    tag: req.body.tag,
-    countInStock: req.body.countInStock,
-    active: req.body.active,
-  });
+const productController = require("../controller/productController");
 
-  product = await product.save();
-
-  if (!product) return res.status(500).send("The product cannot be created");
-
-  res.send(product);
-});
+router.post("/add", verifyTokenAndAdmin, productController.addProduct);
 module.exports = router;
+
+//owner moshakhas kon bad rabeteye beyneshoon ro dorost kon ke har admin mahsoolate khodeh ro betoone edit kone

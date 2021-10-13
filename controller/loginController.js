@@ -1,19 +1,20 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const dict = require("../resources/dict");
 
 exports.loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
     if (!user) {
-      res.status(500).send("Unable to login");
+      res.status(500).send(dict.userNonExistence);
     }
 
     const pass = req.body.password;
     const isMatch = await bcrypt.compare(pass, user.password);
     console.log(isMatch);
     if (!isMatch) {
-      res.send("Unable to login");
+      res.send(dict.loginError);
     }
     const userObject = user.toObject();
     delete userObject.password;
