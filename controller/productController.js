@@ -1,7 +1,7 @@
 const Product = require("../models/Product");
 const dict = require("../resources/dict");
 
-exports.addProduct = async (req, res) => {
+exports.create = async (req, res) => {
   try {
     let product = new Product({
       name: req.body.name,
@@ -22,7 +22,7 @@ exports.addProduct = async (req, res) => {
     return res.status(422).send(e);
   }
 };
-exports.remove = async (req, res) => {
+exports.delete = async (req, res) => {
   console.log("sakhdjhdkhk");
   try {
     const product = await Product.findById(req.params.id);
@@ -40,7 +40,7 @@ exports.remove = async (req, res) => {
   }
 };
 
-exports.editProduct = async (req, res) => {
+exports.update = async (req, res) => {
   try {
     console.log("edit");
     console.log(req.params.id);
@@ -66,20 +66,5 @@ exports.editProduct = async (req, res) => {
     res.status(400).send(e);
   }
 };
-exports.activityStatus = async (req, res) => {
-  try {
-    console.log("hi im me");
-    const product = await Product.findByIdAndUpdate(
-      req.params.id,
-      { active: req.body.state },
 
-      { new: true }
-    );
-    res.send(product);
-  } catch (e) {
-    console.log("hi im me");
-
-    res.status(400).send(e);
-  }
-};
 //exports.edit=async (req,res)

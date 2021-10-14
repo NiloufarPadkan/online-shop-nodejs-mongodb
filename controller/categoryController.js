@@ -1,7 +1,7 @@
 const Category = require("../models/Category");
 const dict = require("../resources/dict");
 
-exports.addCategory = async (req, res) => {
+exports.create = async (req, res) => {
   const category = new Category({
     name: req.body.name,
     owner: req.user.id,
@@ -14,7 +14,7 @@ exports.addCategory = async (req, res) => {
     res.status(400).send(e);
   }
 };
-exports.removeCategory = async (req, res) => {
+exports.delete = async (req, res) => {
   try {
     removedCategory = await Category.findOneAndDelete({ id: req.params.id });
     console.log(req.params.id);
@@ -25,7 +25,7 @@ exports.removeCategory = async (req, res) => {
   }
 };
 
-exports.editCategory = async (req, res) => {
+exports.update = async (req, res) => {
   try {
     const editedCategory = await Category.findByIdAndUpdate(
       req.params.id,

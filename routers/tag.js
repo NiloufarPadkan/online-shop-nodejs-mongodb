@@ -17,21 +17,21 @@ router.post(
   "/add",
   verifyTokenAndAuthorization,
   validationForuniqueness,
-  tagController.addTag
+  tagController.create
 );
 
 router.delete(
   "/remove/:id",
   verifyTokenAndAdmin,
   validationForExisting,
-  tagController.removeTag
+  tagController.delete
 );
 router.put(
   "/edit/:id",
   verifyTokenAndAdmin,
   validationForExisting,
   validationForuniqueness,
-  tagController.editTag
+  tagController.update
 );
 
 module.exports = router;

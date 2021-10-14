@@ -7,7 +7,7 @@ const registerController = require("../controller/registerController");
 const loginController = require("../controller/loginController");
 const { validationForRegister } = require("../middleware/validation");
 
-router.post("/register", validationForRegister, registerController.addUser);
+router.post("/register", validationForRegister, registerController.create);
 
 router.post("/login", loginController.loginUser);
 module.exports = router;

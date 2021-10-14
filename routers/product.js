@@ -7,17 +7,18 @@ const {
   verifyTokenAndAdmin,
 } = require("../middleware/verify");
 const productController = require("../controller/productController");
+const activityController = require("../controller/activityController");
 
-router.post("/add", verifyTokenAndAdmin, productController.addProduct);
+router.post("/add", verifyTokenAndAdmin, productController.create);
 
-router.delete("/remove/:id", verifyTokenAndAdmin, productController.remove);
+router.delete("/remove/:id", verifyTokenAndAdmin, productController.delete);
 //router.delete("/:id/remove", verifyTokenAndAdmin, productController.remove);
 
-router.put("/:id/edit", verifyTokenAndAdmin, productController.editProduct);
+router.put("/:id/edit", verifyTokenAndAdmin, productController.update);
 router.put(
   "/:id/activitystatus",
   verifyTokenAndAdmin,
-  productController.activityStatus
+  activityController.activityStatus
 );
 
 module.exports = router;

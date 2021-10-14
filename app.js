@@ -8,9 +8,19 @@ const tagRoute = require("./routers/tag");
 const productRoute = require("./routers/product");
 const Product = require("./models/Product");
 const dict = require("./resources/dict");
+const rateLimit = require("express-rate-limit");
 
 const app = express();
 
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 4,
+  message:
+    "Too many accounts created from this IP, please try again after an hour",
+});
+
+// only apply to requests that begin with /api/
+app.use("/login", apiLimiter);
 dotenv.config();
 app.use(express.json());
 app.use(authRoute);

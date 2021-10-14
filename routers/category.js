@@ -17,21 +17,21 @@ router.post(
   "/add",
   verifyTokenAndAuthorization,
   validationForuniqueness,
-  categoryController.addCategory
+  categoryController.create
 );
 
 router.delete(
   "/remove/:id",
   verifyTokenAndAdmin,
   validationForExisting,
-  categoryController.removeCategory
+  categoryController.delete
 );
 router.put(
   "/edit/:id",
   verifyTokenAndAdmin,
   validationForExisting,
   validationForuniqueness,
-  categoryController.editCategory
+  categoryController.update
 );
 
 module.exports = router;

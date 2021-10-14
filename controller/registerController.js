@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const validator = require("validator");
-exports.addUser = async (req, res) => {
+exports.create = async (req, res) => {
   const newUser = new User({
     username: req.body.username,
     email: req.body.email,

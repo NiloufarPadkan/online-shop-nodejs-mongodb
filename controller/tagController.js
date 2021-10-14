@@ -1,7 +1,7 @@
 const Tag = require("../models/Tag");
 const dict = require("../resources/dict");
 
-exports.addTag = async (req, res) => {
+exports.create = async (req, res) => {
   const tag = new Tag({
     name: req.body.name,
     owner: req.user.id,
@@ -16,7 +16,7 @@ exports.addTag = async (req, res) => {
   }
 };
 
-exports.removeTag = async (req, res) => {
+exports.delete = async (req, res) => {
   try {
     removedTag = await Tag.deleteOne({ id: req.params.id });
 
@@ -26,7 +26,7 @@ exports.removeTag = async (req, res) => {
   }
 };
 
-exports.editTag = async (req, res) => {
+exports.update = async (req, res) => {
   try {
     const editedTag = await Tag.findByIdAndUpdate(
       req.params.id,
