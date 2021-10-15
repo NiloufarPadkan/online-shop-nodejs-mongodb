@@ -1,4 +1,4 @@
-const jwt = require("jwt-redis");
+const jwt = require("jsonwebtoken");
 const dict = require("../resources/dict");
 
 const verifyToken = (req, res, next) => {

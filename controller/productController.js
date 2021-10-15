@@ -66,5 +66,26 @@ exports.update = async (req, res) => {
     res.status(400).send(e);
   }
 };
+exports.read = async (req, res) => {
+  //products?categories=2342342,234234
 
-//exports.edit=async (req,res)
+  const tagFilter = req.query.tags
+    ? { tag: { $in: req.query.tags.split(",") } }
+    : {};
+  const categoryFilter = req.query.categories
+    ? { category: { $in: req.query.categories.split(",") } }
+    : {}; // more variables that you need and are empty objects if don't exist
+  const nameFilter = req.query.name ? { name: req.query.name } : {};
+
+  console.log(tagFilter);
+  const productList = await Product.find({
+    ...tagFilter,
+    ...categoryFilter,
+    ...nameFilter,
+  }).populate("category");
+
+  if (!productList) {
+    res.status(500).json({ success: false });
+  }
+  res.send(productList);
+};

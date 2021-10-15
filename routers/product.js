@@ -10,6 +10,7 @@ const productController = require("../controller/productController");
 const activityController = require("../controller/activityController");
 
 router.post("/add", verifyTokenAndAdmin, productController.create);
+router.get("/", productController.read);
 
 router.delete("/remove/:id", verifyTokenAndAdmin, productController.delete);
 //router.delete("/:id/remove", verifyTokenAndAdmin, productController.remove);
