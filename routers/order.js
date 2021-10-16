@@ -13,12 +13,10 @@ router.post("/", verifyToken, async (req, res) => {
   try {
     let order = new Order({
       products: req.body.products,
-
       userId: req.user.id,
     });
 
     order = await order.save();
-
     res.send(order);
   } catch (e) {
     res.status(400).send(e);

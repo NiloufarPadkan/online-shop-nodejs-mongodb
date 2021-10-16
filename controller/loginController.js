@@ -21,7 +21,7 @@ exports.loginUser = async (req, res) => {
     const accessToken = jwt.sign(
       { id: userObject._id, isAdmin: userObject.isAdmin },
       process.env.JWT_KEY,
-      { expiresIn: "1w" }
+      { expiresIn: process.env.EXPIRE_TIME }
     );
     res.status(200).send({ userObject, accessToken });
   } catch (e) {

@@ -15,12 +15,16 @@ exports.create = async (req, res) => {
   }
 };
 exports.read = async (req, res) => {
-  if (req.params.id) {
-    const category = await Category.findById(req.params.id);
-    return res.status(200).send(category);
+  try {
+    if (req.params.id) {
+      const category = await Category.findById(req.params.id);
+      return res.status(200).send(category);
+    }
+    const categories = await Category.find();
+    return res.status(200).send(categories);
+  } catch (e) {
+    return res.status(500).send(dict.categoryNonExistence);
   }
-  const categories = await Category.find();
-  return res.status(200).send(categories);
 };
 exports.delete = async (req, res) => {
   try {
