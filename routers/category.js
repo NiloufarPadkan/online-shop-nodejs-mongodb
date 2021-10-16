@@ -20,6 +20,9 @@ router.post(
   categoryController.create
 );
 
+router.get("/get/:id", categoryController.read);
+router.get("/get", categoryController.read);
+
 router.delete(
   "/remove/:id",
   verifyTokenAndAdmin,

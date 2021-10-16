@@ -14,6 +14,14 @@ exports.create = async (req, res) => {
     res.status(400).send(e);
   }
 };
+exports.read = async (req, res) => {
+  if (req.params.id) {
+    const category = await Category.findById(req.params.id);
+    return res.status(200).send(category);
+  }
+  const categories = await Category.find();
+  return res.status(200).send(categories);
+};
 exports.delete = async (req, res) => {
   try {
     removedCategory = await Category.findOneAndDelete({ id: req.params.id });

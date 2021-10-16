@@ -61,4 +61,6 @@ const productSchema = mongoose.Schema({
   },
   comment: [{}],
 });
+productSchema.index({ name: "text" });
+
 module.exports = mongoose.model("Product", productSchema);

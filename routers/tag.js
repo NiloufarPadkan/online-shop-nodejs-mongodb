@@ -20,6 +20,9 @@ router.post(
   tagController.create
 );
 
+router.get("/get/:id", tagController.read);
+router.get("/get", tagController.read);
+
 router.delete(
   "/remove/:id",
   verifyTokenAndAdmin,

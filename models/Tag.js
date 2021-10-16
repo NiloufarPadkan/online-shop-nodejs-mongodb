@@ -9,5 +9,12 @@ const tagSchema = mongoose.Schema({
     type: ObjectId,
   },
 });
-
+tagSchema.virtual("products", {
+  ref: "Product",
+  localField: "_id",
+  foreignField: "tag",
+});
+tagSchema.set("toObject", { virtuals: true });
+tagSchema.set("toJSON", { virtuals: true });
+tagSchema.index({ name: "text" });
 module.exports = mongoose.model("Tag", tagSchema);

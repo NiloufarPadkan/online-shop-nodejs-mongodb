@@ -15,7 +15,14 @@ exports.create = async (req, res) => {
     res.status(400).send(e);
   }
 };
-
+exports.read = async (req, res) => {
+  if (req.params.id) {
+    const tag = await Tag.findById(req.params.id);
+    return res.status(200).send(tag);
+  }
+  const tags = await Tag.find();
+  return res.status(200).send(tags);
+};
 exports.delete = async (req, res) => {
   try {
     removedTag = await Tag.deleteOne({ id: req.params.id });

@@ -67,14 +67,12 @@ exports.update = async (req, res) => {
   }
 };
 exports.read = async (req, res) => {
-  //products?categories=2342342,234234
-
   const tagFilter = req.query.tags
     ? { tag: { $in: req.query.tags.split(",") } }
     : {};
   const categoryFilter = req.query.categories
     ? { category: { $in: req.query.categories.split(",") } }
-    : {}; // more variables that you need and are empty objects if don't exist
+    : {};
   const nameFilter = req.query.name ? { name: req.query.name } : {};
 
   console.log(tagFilter);
@@ -82,7 +80,9 @@ exports.read = async (req, res) => {
     ...tagFilter,
     ...categoryFilter,
     ...nameFilter,
-  }).populate("category");
+  })
+    .populate("category")
+    .populate("tag");
 
   if (!productList) {
     res.status(500).json({ success: false });
