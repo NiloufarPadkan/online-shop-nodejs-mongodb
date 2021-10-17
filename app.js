@@ -7,6 +7,7 @@ const categoryRoute = require("./routers/category");
 const tagRoute = require("./routers/tag");
 const productRoute = require("./routers/product");
 const orerRoute = require("./routers/order");
+const commentRoute = require("./routers/comment");
 
 const rateLimit = require("express-rate-limit");
 dotenv.config();
@@ -29,6 +30,7 @@ app.use("/category", categoryRoute);
 app.use("/tag", tagRoute);
 app.use("/product", productRoute);
 app.use("/order", orerRoute);
+app.use("/comment", commentRoute);
 
 app.listen(process.env.port || 3000, () => {
   console.log("server is running");

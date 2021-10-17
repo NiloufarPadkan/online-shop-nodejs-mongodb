@@ -58,8 +58,7 @@ const productSchema = mongoose.Schema({
     type: Boolean,
     deafult: true,
   },
-  comment: [{}],
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
-productSchema.index({ name: "text" });
 
 module.exports = mongoose.model("Product", productSchema);

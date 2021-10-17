@@ -1,6 +1,6 @@
 # online-shop
 
-# About This Project
+## About This Project
 
     An online shop based on Nodejs
 
@@ -9,7 +9,6 @@
 1-clone this repo
 
 2-To run this app, set your variables in .env file at the root of the project
-Variables that you need to set:
 
 - port
 - JWT_KEY
@@ -21,7 +20,7 @@ Variables that you need to set:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/12694267-636d42ca-f139-4b94-9437-46b746d51be1?action=collection%2Ffork&collection-url=entityId%3D12694267-636d42ca-f139-4b94-9437-46b746d51be1%26entityType%3Dcollection%26workspaceId%3Dbefe7c4b-c8d0-4fb8-b443-7e4deccd31ff)
 
-# Node modules
+## Node modules
 
 - Nodejs version 16.10.3
 - express version 4.17.1
