@@ -31,3 +31,4 @@
 - bcryptjs version 2.4.3
 - jsonwebtoken version 8.5.1
 - express-rate-limit version 5.5.0
+- multer verison 1.4.3

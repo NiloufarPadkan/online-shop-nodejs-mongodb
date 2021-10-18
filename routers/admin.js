@@ -1,4 +1,4 @@
 //accept orders
 //approve comments
-//see products 
+//see products
 //see number of products

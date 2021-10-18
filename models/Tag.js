@@ -1,18 +1,18 @@
 const { ObjectId } = require("bson");
 const mongoose = require("mongoose");
 const tagSchema = mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  owner: {
-    type: ObjectId,
-  },
+    name: {
+        type: String,
+        required: true,
+    },
+    owner: {
+        type: ObjectId,
+    },
 });
 tagSchema.virtual("products", {
-  ref: "Product",
-  localField: "_id",
-  foreignField: "tag",
+    ref: "Product",
+    localField: "_id",
+    foreignField: "tag",
 });
 tagSchema.set("toObject", { virtuals: true });
 tagSchema.set("toJSON", { virtuals: true });
