@@ -10,17 +10,13 @@ const orerRoute = require("./routers/order");
 const commentRoute = require("./routers/comment");
 const bodyparser = require("body-parser");
 const rateLimit = require("express-rate-limit");
-//const multer=require("multer")
+const conversationRoute = require("./routers/conversation");
+
 dotenv.config();
 
 const app = express();
 app.use(bodyparser.json({}));
-//newupload=multer()
 app.use(bodyparser.urlencoded({ extended: true }));
-//app.use(newupload.array())
-
-// app.use(require("express-body"));
-//app.use(bodyparser.json());
 connectDb();
 const apiLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -37,6 +33,7 @@ app.use("/tag", tagRoute);
 app.use("/product", productRoute);
 app.use("/order", orerRoute);
 app.use("/comment", commentRoute);
+app.use("/conversation", conversationRoute);
 
 app.listen(process.env.port || 3000, () => {
     console.log("server is running");

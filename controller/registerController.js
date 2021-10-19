@@ -1,7 +1,8 @@
 const User = require("../models/User");
 const validator = require("validator");
 exports.create = async (req, res) => {
-    console.log(req.body);
+    console.log("registering");
+    console.log(req.fields);
     const newUser = new User({
         username: req.body.username,
         email: req.body.email,

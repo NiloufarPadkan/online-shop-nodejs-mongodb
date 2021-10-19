@@ -14,7 +14,7 @@ const router = express.Router();
 router.post(
     "/:id",
     verifyToken,
-
+    uploadMiddleware.upload.single("image"),
     commentController.create
 );
 router.post(

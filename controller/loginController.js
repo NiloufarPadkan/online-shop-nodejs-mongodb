@@ -20,7 +20,10 @@ exports.loginUser = async (req, res) => {
         const userObject = user.toObject();
         delete userObject.password;
         const accessToken = jwt.sign(
-            { id: userObject._id, isAdmin: userObject.isAdmin },
+            {
+                id: userObject._id,
+                isAdmin: userObject.isAdmin,
+            },
             process.env.JWT_KEY,
             { expiresIn: process.env.EXPIRE_TIME }
         );

@@ -3,7 +3,6 @@ const Comment = require("../models/Comment");
 
 exports.create = async (req, res) => {
     console.log(req.body);
-    console.log("hi");
     if (req.path === "/me/avatar") {
         const updatedUser = await User.findByIdAndUpdate(
             req.user.id,
