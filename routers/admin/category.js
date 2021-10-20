@@ -1,28 +1,18 @@
-const Category = require("../models/Category");
 const express = require("express");
-const {
-    verifyToken,
-    verifyTokenAndAuthorization,
-    verifyTokenAndAdmin,
-} = require("../middleware/verify");
+const { verifyTokenAndAdmin } = require("../../middleware/verify");
 const {
     validationForuniqueness,
     validationForExisting,
-} = require("../middleware/categoryValidation");
+} = require("../../middleware/categoryValidation");
 
 const router = express.Router();
-const categoryController = require("../controller/categoryController");
-
+const categoryController = require("../../controller/admin/categoryController");
 router.post(
     "/add",
-    verifyTokenAndAuthorization,
+    verifyTokenAndAdmin,
     validationForuniqueness,
     categoryController.create
 );
-
-router.get("/get/:id", categoryController.read);
-router.get("/get", categoryController.read);
-
 router.delete(
     "/remove/:id",
     verifyTokenAndAdmin,

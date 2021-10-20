@@ -1,5 +1,5 @@
-const Product = require("../models/Product");
-const dict = require("../resources/dict");
+const Product = require("../../models/Product");
+const dict = require("../../resources/dict");
 const multer = require("multer");
 exports.create = async (req, res) => {
     try {
@@ -26,14 +26,15 @@ exports.create = async (req, res) => {
     }
 };
 exports.delete = async (req, res) => {
+    console.log(req.params.id);
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+        return res.status(422).send(dict.productNonExistence);
+    }
+    console.log(product.id);
     try {
-        const product = await Product.findById(req.params.id);
-
-        if (!product) {
-            return res.status(422).send(dict.productNonExistence);
-        }
-        removedProduct = await Product.deleteOne({ id: req.params.id });
-
+        removedProduct = await Product.findByIdAndDelete(req.params.id);
+        console.log(removedProduct.id);
         res.status(200).send(dict.sucessfulRemove);
     } catch (e) {
         console.log("yes");
@@ -66,27 +67,4 @@ exports.update = async (req, res) => {
         console.log("bad request");
         res.status(400).send(e);
     }
-};
-exports.read = async (req, res) => {
-    const tagFilter = req.query.tags
-        ? { tag: { $in: req.query.tags.split(",") } }
-        : {};
-    const categoryFilter = req.query.categories
-        ? { category: { $in: req.query.categories.split(",") } }
-        : {};
-    const nameFilter = req.query.name ? { name: req.query.name } : {};
-
-    console.log(tagFilter);
-    const productList = await Product.find({
-        ...tagFilter,
-        ...categoryFilter,
-        ...nameFilter,
-    })
-        .populate("category")
-        .populate("tag");
-
-    if (!productList) {
-        res.status(500).json({ success: false });
-    }
-    res.send(productList);
 };

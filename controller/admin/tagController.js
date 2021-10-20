@@ -1,5 +1,5 @@
-const Tag = require("../models/Tag");
-const dict = require("../resources/dict");
+const Tag = require("../../models/Tag");
+const dict = require("../../resources/dict");
 
 exports.create = async (req, res) => {
     const tag = new Tag({
@@ -14,14 +14,6 @@ exports.create = async (req, res) => {
     } catch (e) {
         res.status(400).send(e);
     }
-};
-exports.read = async (req, res) => {
-    if (req.params.id) {
-        const tag = await Tag.findById(req.params.id);
-        return res.status(200).send(tag);
-    }
-    const tags = await Tag.find();
-    return res.status(200).send(tags);
 };
 exports.delete = async (req, res) => {
     try {

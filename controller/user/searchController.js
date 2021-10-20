@@ -1,7 +1,7 @@
-const Product = require("../models/Product");
-const Tag = require("../models/Tag");
+const Product = require("../../models/Product");
+const Tag = require("../../models/Tag");
 
-const dict = require("../resources/dict");
+const dict = require("../../resources/dict");
 
 exports.search = async (req, res) => {
     const searchString = req.query.search;

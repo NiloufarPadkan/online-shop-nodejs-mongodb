@@ -1,27 +1,7 @@
-const Order = require("../models/Order");
-const {
-    verifyToken,
-    verifyTokenAndAuthorization,
-    verifyTokenAndAdmin,
-} = require("../middleware/verify");
+const Order = require("../../models/Order");
+const { verifyTokenAndAdmin } = require("../../middleware/verify");
 
 const router = require("express").Router();
-
-//CREATE
-
-router.post("/", verifyToken, async (req, res) => {
-    try {
-        let order = new Order({
-            products: req.body.products,
-            userId: req.user.id,
-        });
-
-        order = await order.save();
-        res.send(order);
-    } catch (e) {
-        res.status(400).send(e);
-    }
-});
 
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
     try {
@@ -46,6 +26,12 @@ router.get("/pending", verifyTokenAndAdmin, async (req, res) => {
 });
 router.post("/confirm/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
+        //add check existing
+        const order = await Order.findById(req.params.id);
+        if (!order) {
+            return res.status(422).send(dict.orderNonExistence);
+        }
+
         const confirmedOrder = await Order.findByIdAndUpdate(
             req.params.id,
             { status: "confirmed" },

@@ -18,6 +18,7 @@ var dict = {
     weakPass:
         " its weak. required condition : minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1",
     lengthError: "نام کاربری باید بین 6 تا 30 کارکتر باشد",
+    orderNonExistence: "سفارش یافت نشد",
 };
 
 module.exports = dict;

@@ -7,8 +7,6 @@ const User = require("../models/User");
 const uploadMiddleware = require("../middleware/uploadMiddleware");
 const uploadController = require("../controller/uploadController");
 
-const searchController = require("../controller/searchController");
-
 const router = require("express").Router();
 
 router.post(
@@ -29,7 +27,6 @@ router.delete(
         res.status(400).send({ error: error.message });
     }
 );
-router.get("/search", searchController.search);
 
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
     try {

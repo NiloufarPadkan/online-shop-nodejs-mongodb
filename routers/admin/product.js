@@ -1,16 +1,15 @@
-const Product = require("../models/Product");
+const Product = require("../../models/Product");
 const express = require("express");
 const router = express.Router();
 const {
     verifyToken,
     verifyTokenAndAuthorization,
     verifyTokenAndAdmin,
-} = require("../middleware/verify");
-const uploadMiddleware = require("../middleware/uploadMiddleware");
-const uploadController = require("../controller/uploadController");
+} = require("../../middleware/verify");
+const uploadMiddleware = require("../../middleware/uploadMiddleware");
 
-const productController = require("../controller/productController");
-const activityController = require("../controller/activityController");
+const productController = require("../../controller/admin/productController");
+const activityController = require("../../controller/admin/activityController");
 
 router.post(
     "/add",
@@ -18,7 +17,6 @@ router.post(
     uploadMiddleware.upload.single("cover"),
     productController.create
 );
-router.get("/", productController.read);
 
 router.delete("/remove/:id", verifyTokenAndAdmin, productController.delete);
 //router.delete("/:id/remove", verifyTokenAndAdmin, productController.remove);

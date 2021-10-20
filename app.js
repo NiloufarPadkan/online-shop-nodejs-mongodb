@@ -2,15 +2,29 @@ const express = require("express");
 const connectDb = require("./db/mongoose");
 const dotenv = require("dotenv");
 const authRoute = require("./routers/auth");
-const userRoute = require("./routers/user");
-const categoryRoute = require("./routers/category");
-const tagRoute = require("./routers/tag");
-const productRoute = require("./routers/product");
-const orerRoute = require("./routers/order");
-const commentRoute = require("./routers/comment");
+const userAvatarRoute = require("./routers/user/avatar");
+
+const adminCategoryRoute = require("./routers/admin/category");
+const userCategoryRoute = require("./routers/user/category");
+
+const adminTagRoute = require("./routers/admin/tag");
+const userTagRoute = require("./routers/user/tag");
+
+const adminProductRoute = require("./routers/admin/product");
+const userProductRoute = require("./routers/user/product");
+
+const AdminOrerRoute = require("./routers/admin/order");
+const userOrerRoute = require("./routers/user/order");
+
+const adminCommentRoute = require("./routers/admin/comment");
+const userCommentRoute = require("./routers/user/comment");
+
+const adminConversationRoute = require("./routers/admin/conversation");
+const userConversationRoute = require("./routers/user/conversation");
+
+const searchRoute = require("./routers/user/search");
 const bodyparser = require("body-parser");
 const rateLimit = require("express-rate-limit");
-const conversationRoute = require("./routers/conversation");
 
 dotenv.config();
 
@@ -27,13 +41,27 @@ const apiLimiter = rateLimit({
 
 app.use("/login", apiLimiter);
 app.use(authRoute);
-app.use(userRoute);
-app.use("/category", categoryRoute);
-app.use("/tag", tagRoute);
-app.use("/product", productRoute);
-app.use("/order", orerRoute);
-app.use("/comment", commentRoute);
-app.use("/conversation", conversationRoute);
+app.use(userAvatarRoute);
+
+app.use(searchRoute);
+
+app.use("/category", adminCategoryRoute);
+app.use("/category", userCategoryRoute);
+
+app.use("/tag", adminTagRoute);
+app.use("/tag", userTagRoute);
+
+app.use("/product", adminProductRoute);
+app.use("/product", userProductRoute);
+
+app.use("/order", AdminOrerRoute);
+app.use("/order", userOrerRoute);
+
+app.use("/comment", adminCommentRoute);
+app.use("/comment", userCommentRoute);
+
+app.use("/conversation", userConversationRoute);
+app.use("/conversation", adminConversationRoute);
 
 app.listen(process.env.port || 3000, () => {
     console.log("server is running");

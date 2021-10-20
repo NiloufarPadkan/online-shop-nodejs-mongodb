@@ -1,27 +1,22 @@
-const Tag = require("../models/Tag");
 const express = require("express");
 const {
     verifyToken,
     verifyTokenAndAuthorization,
     verifyTokenAndAdmin,
-} = require("../middleware/verify");
+} = require("../../middleware/verify");
 const {
     validationForuniqueness,
     validationForExisting,
-} = require("../middleware/tagValidation");
+} = require("../../middleware/tagValidation");
 
 const router = express.Router();
-const tagController = require("../controller/tagController");
-
+const tagController = require("../../controller/admin/tagController");
 router.post(
     "/add",
-    verifyTokenAndAuthorization,
+    verifyTokenAndAdmin,
     validationForuniqueness,
     tagController.create
 );
-
-router.get("/get/:id", tagController.read);
-router.get("/get", tagController.read);
 
 router.delete(
     "/remove/:id",

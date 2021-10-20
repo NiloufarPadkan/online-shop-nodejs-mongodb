@@ -1,5 +1,5 @@
-const Product = require("../models/Product");
-const dict = require("../resources/dict");
+const Product = require("../../models/Product");
+const dict = require("../../resources/dict");
 
 exports.activityStatus = async (req, res) => {
     try {
